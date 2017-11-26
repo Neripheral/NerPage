@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'nerpage',
-	'password' => 'O0q8pV3hWJIQNCls',
-	'database' => 'nerpage',
+	'hostname' => '164.132.104.34',
+	'username' => 'phpAccess_OP',
+	'password' => 'Jcb5hDxjJen1lz6o',
+	'database' => 'NerPage',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
