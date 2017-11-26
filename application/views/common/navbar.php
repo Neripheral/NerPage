@@ -2,13 +2,14 @@
 <?php
     /*
      * Receives:
-     * $fromController["NAVBAR"][0-?]["text"      -   Name of the tab
-     *                                "href"      -   Address the tab should link to
-     *                                "class"];   -   Styling classes
+     * $fromController["NAVBAR"][0-?]["text"]      -   Name of the tab
+     *                               ["href"]      -   Address the tab should link to
+     *                               ["class"];   -   Styling classes
+     *                ["USER"]
      */
 
-//@todo: Check if all variables are set or set them. 
-    
+    isset($fromController) OR $fromController = array();
+    isset($fromController) OR $fromController["NAVBAR"] = array();
 ?>
 <nav class="navbar navbar-dark navbar-expand bg-dark">
     <div class="container-fluid">

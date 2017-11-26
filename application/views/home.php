@@ -1,5 +1,6 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php 
-//@todo: add sign in and sign up links
+//@idea: add sign in and sign up links
 ?>
 
 <main class="container">

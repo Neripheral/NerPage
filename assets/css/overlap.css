@@ -1,3 +1,21 @@
+@import url("http://cdnjs.cloudflare.com/ajax/libs/octicons/3.1.0/octicons.css");
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+
 main{
 	padding-top: 3rem;
 }
