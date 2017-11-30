@@ -16,7 +16,7 @@
     	<div class="navbar-header">
     		<a class="navbar-brand text-light">NerPage</a>
     	</div>
-    	<ul class="nav navbar-nav">
+    	<ul class="nav navbar-nav nav-tabs">
         	<?php 
         	   foreach($fromController["NAVBAR"] as $tab){
         	       $tpl = new Smarty;

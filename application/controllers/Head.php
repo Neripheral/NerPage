@@ -7,17 +7,30 @@ require_once APPPATH."third_party/smarty/Smarty.class.php";
  * It accumulates all repeating functions.
  */
 class Head_Controller extends CI_Controller{
-    protected function viewHeader($activeTab){
+/* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* --------PROTECTED------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    protected function fetchInput($wantedFields){
+        $toReturn = array();
+        foreach($wantedFields as $field)
+            $toReturn[$field] = $this->input->post($field);
+        return $toReturn;
+    }
+    
+    /*
+     * $activeTab - string containg name of the selected tab
+     */
+    protected function header_view($activeTab){
         $toPass = array("fromController" => array("NAVBAR" => array()));
         
         array_push($toPass["fromController"]["NAVBAR"], array("text" => "Home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""));
-
-        //@todo checking if user is logged or not
-        if(false){ //logged
-            //@todo what to do if user is logged
+        
+        if(isset($this->session->userId)){ //logged
+            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Account", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"));
+            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign Out", "href" => base_url("index.php/signing/signout"), "class" => "", "icon" => "octicon octicon-link-external"));
         }else{ //unlogged
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign Up", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"));
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Log In", "href" => base_url("index.php/login"), "class" => "", "icon" => "octicon octicon-link-external"));
+            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Register", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"));
+            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign In", "href" => base_url("index.php/signing"), "class" => "", "icon" => "octicon octicon-link-external"));
         }
         
         foreach($toPass["fromController"]["NAVBAR"] as &$tab){
@@ -26,10 +39,31 @@ class Head_Controller extends CI_Controller{
         $this->load->view("common/header", $toPass);
     }
     
-    protected function viewFooter(){
+    
+    protected function footer_view(){
         $this->load->view("common/footer");
     }
-    
-    public function test(){
-    }
+/* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+    /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 }
+
+
+
+
+
+
+
+/* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+    /* ------INPUT_FETCH-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+    /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+    /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-11-24 17:19:01
+/* Smarty version 3.1.30, created on 2017-11-30 21:03:11
   from "F:\xampp\htdocs\www\NerPage\application\views\templates\navbar_navtabs.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a184675b74e11_43550798',
+  'unifunc' => 'content_5a2063fff40152_58635553',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4980aef4aa827f7681045b8f6a718c9cfb86aee6' => 
     array (
       0 => 'F:\\xampp\\htdocs\\www\\NerPage\\application\\views\\templates\\navbar_navtabs.tpl',
-      1 => 1511540266,
+      1 => 1512072154,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a184675b74e11_43550798 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a2063fff40152_58635553 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <li class="nav-item <?php echo $_smarty_tpl->tpl_vars['class']->value;?>
 ">
