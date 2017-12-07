@@ -74,15 +74,15 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => '164.132.104.34',
+	'dsn'	=> 'mysql:host=164.132.104.34; dbname=NerPage; charset=utf8;',
+	'hostname' => 'mysql:host=164.132.104.34',
 	'username' => 'phpAccess_OP',
 	'password' => 'Mp0wWfbLOA6PvleT',
 	'database' => 'NerPage',
-	'dbdriver' => 'mysqli',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => false,//(ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',

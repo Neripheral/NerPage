@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="3" assertions="3" failures="0" errors="0" time="0.758051">
-    <testsuite name="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" fullPackage="Welcome" tests="3" assertions="3" failures="0" errors="0" time="0.758051">
-      <testcase name="test_index" class="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.257414"/>
-      <testcase name="test_method_404" class="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.208042"/>
-      <testcase name="test_APPPATH" class="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.292595"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="8" assertions="7" errors="1" failures="0" skipped="0" time="1.570531">
+    <testsuite name="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" tests="5" assertions="4" errors="1" failures="0" skipped="0" time="1.205724">
+      <testcase name="test_index" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="48" assertions="1" time="0.219737"/>
+      <testcase name="test_registerUserFromFormRedirectsToSigningPage" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="54" assertions="0" time="0.446269">
+        <error type="Error">Registration_test::test_registerUserFromFormRedirectsToSigningPage
+Error: Call to a member function get_compiled_insert() on null
+
+F:\xampp\htdocs\www\NerPage\application\models\Users_model.php:12
+F:\xampp\htdocs\www\NerPage\application\models\Users_model.php:40
+F:\xampp\htdocs\www\NerPage\application\controllers\Registration.php:10
+F:\xampp\htdocs\www\NerPage\application\controllers\Registration.php:32
+F:\xampp\htdocs\www\NerPage\application\controllers\Registration.php:40
+F:\xampp\htdocs\www\NerPage\application\tests\_ci_phpunit_test\CIPHPUnitTestRequest.php:348
+F:\xampp\htdocs\www\NerPage\application\tests\_ci_phpunit_test\CIPHPUnitTestRequest.php:282
+F:\xampp\htdocs\www\NerPage\application\tests\_ci_phpunit_test\CIPHPUnitTestRequest.php:151
+F:\xampp\htdocs\www\NerPage\application\tests\_ci_phpunit_test\CIPHPUnitTestCase.php:183
+F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php:61
+</error>
+      </testcase>
+      <testcase name="test_registerUserFromFormMissingUsername" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="66" assertions="1" time="0.180231"/>
+      <testcase name="test_registerUserFromFormMissingPassword" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="78" assertions="1" time="0.178104"/>
+      <testcase name="test_registerUserFromFormMissingEmail" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="89" assertions="1" time="0.181383"/>
+    </testsuite>
+    <testsuite name="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.364807">
+      <testcase name="test_index" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.186239"/>
+      <testcase name="test_method_404" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.178012"/>
+      <testcase name="test_APPPATH" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.000556"/>
     </testsuite>
   </testsuite>
 </testsuites>
