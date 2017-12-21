@@ -1,26 +1,25 @@
 <?php 
 defined("BASEPATH") OR exit("No direct script access allowed");
+require_once("HashedPassword.php");
 
 class User{
-/* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    /* ------PROPERTIES--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ------PROPERTIES--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    private $id;
     private $username;
-    private $hashedPassword;
+    private $password;
     private $email;
     private $permissions;
-    /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    private function setHashedPassword($hashedPassword){
-        $this->hashedPassword = $hashedPassword;
+/* ------GETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+    public function getId(){
+        return $this->id;
     }
-/* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    /* ------GETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+    
     public function getUsername(){
         return $this->username;
     }
     
-    
-    public function getHashedPassword(){
-        return $this->hashedPassword;
+    public function getPassword(){
+        return $this->password->getPassword();
     }
     
     
@@ -32,16 +31,12 @@ class User{
     public function getPermissions(){
         return $this->permissions;
     }
-    
-    public function getAsArray(){
-        return array(
-            "username" => $this->getUsername(),
-            "password" => $this->getHashedPassword(),
-            "email" => $this->getEmail(),
-            "permissions" => $this->getPermissions()
-        );
+/* ------SETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+    public function setId($userId){
+        $this->userId = $id;
     }
-    /* ------SETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+    
+    
     public function setUsername($username){
         $this->username = $username;
     }
@@ -55,20 +50,39 @@ class User{
     public function setPermissions($permissions){
         $this->permissions = $permissions;
     }
-    /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    public function hashAndSetPassword($password){
-        $this->setHashedPassword(password_hash($password, PASSWORD_DEFAULT));
+/* ------PRIVATE-METHODS---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    public function setHashedPassword($password){
+        $this->password->setHashedPassword($password);
+    }
+    
+    private function setAndHashPassword($password){
+        $this->password->setNormalPassword($password);
+        $this->password->hashStoredPassword();
+    }
+/* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    public function getAsArray(){
+        return array(
+            "id" => $this->getId(),
+            "username" => $this->getUsername(),
+            "password" => $this->getPassword(),
+            "email" => $this->getEmail(),
+            "permissions" => $this->getPermissions()
+        );
     }
     
     
-    public function equalToHashedPassword($password){
-        return password_verify($password, $this->getHashedPassword());
+    public function equalToPassword($password){
+        return $this->password->equalTo($password);
     }
     
     
     public function initializeAll($username, $password, $email, $permission){
         $this->setUsername($username);
-        $this->hashAndSetPassword($password);
+        $this->password = new HashedPassword();
+        if(preg_match('/^\$2y\$10\$.*$/', $password))
+            $this->setHashedPassword($password);
+        else
+            $this->setAndHashPassword($password);
         $this->setEmail($email);
         $this->setPermissions($permission);
     }
@@ -79,10 +93,4 @@ class User{
     }
 }
     
-/* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    /* ------PROPERTIES--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    /* ------GETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-    /* ------SETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-    /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH."third_party/smarty/Smarty.class.php";
+require_once APPPATH."libraries/User.php";
 
 /*
  * Main controller overlapping every personal controller.
@@ -25,8 +26,8 @@ class Head_Controller extends CI_Controller{
         
         array_push($toPass["fromController"]["NAVBAR"], array("text" => "Home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""));
         
-        if(isset($this->session->userId)){ //logged
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Account", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"));
+        if(isset($this->session->loggedUser)){ //logged
+            array_push($toPass["fromController"]["NAVBAR"], array("text" => $this->session->loggedUser->getUsername(), "href" => base_url("index.php/account"), "class" => "", "icon" => "octicon octicon-person"));
             array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign Out", "href" => base_url("index.php/signing/signout"), "class" => "", "icon" => "octicon octicon-link-external"));
         }else{ //unlogged
             array_push($toPass["fromController"]["NAVBAR"], array("text" => "Register", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"));

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head_model.php");
+require_once(APPPATH."libraries/User.php");
 
 class Users_model extends Head_model{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -22,21 +23,21 @@ class Users_model extends Head_model{
     /* ------SELECT------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     // Arg: array of $columns and array($column=>value) condition
     public function getMatchingUser($conditions){
-        $this->convertPassword($conditions);
         $query = $this->getQuery_select(NULL, $conditions);
         $data = $this->db->query($query)->result_array();
         
         if(empty($data))
-            $data = NULL;
-        else
-            $data = $data[0];
-        return $data;
+            return null;
+        $data = $data[0];
+        return new User($data["username"], $data["password"], $data["email"], $data["permission"]);
     }
     /* ------UPDATE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /* ------INSERT------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function insert($userToAdd){
-        $query = $this->getQuery_insert($userToAdd->getAsArray());
+        $userData = $userToAdd->getAsArray();
+        unset($userData["id"]);
+        $query = $this->getQuery_insert($userData);
         $this->db->query($query);
         $error = $this->db->error();
         if($error["code"] == 0)

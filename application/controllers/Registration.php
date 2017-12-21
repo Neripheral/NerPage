@@ -10,14 +10,21 @@ class Registration extends Head_Controller{
         if($returnValue === true)
             return true;
         switch($returnValue["code"]){
+            case "23000/1062":
+                if(preg_match("/key 'username'/", $returnValue["message"]))
+                    throw new DBException("The specified username was taken.");
+                elseif(preg_match("/key 'email'/", $returnValue["message"]))
+                    throw new DBException("The specified email already has been used.");
             default:
-                throw new PDOException($returnValue["message"]);
+                throw new DBException($returnValue["message"]);
         }
     }
     
     private function validateUserData($userData){
         if($userData["username"] == null || $userData["password"] == null || $userData["email"] == null)
-            throw new InvalidArgumentException("Missing input");
+            throw new InvalidArgumentException("Missing input data");
+        if(!filter_var($userData["email"], FILTER_VALIDATE_EMAIL))
+            throw new InvalidArgumentException("Incorrect email address");
         return true;
     }
     /* ------INPUT_FETCH-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -40,11 +47,11 @@ class Registration extends Head_Controller{
         $userData = $this->fetchInput_register();
         try{
             $this->registerUserFromData($userData);
-        }catch(PDOException $e){
+        }catch(DBException $e){
             $this->session->set_flashdata("error", $e->getMessage());
             redirect("registration");
         }catch(InvalidArgumentException $e){
-            $this->session->set_flashdata("error", "Incorrect input data");
+            $this->session->set_flashdata("error", $e->getMessage());
             redirect("registration");
         }
         redirect("signing");

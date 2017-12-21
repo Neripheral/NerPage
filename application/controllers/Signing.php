@@ -8,13 +8,7 @@ class Signing extends Head_Controller{
     // Flags session as logged and inserts user's data
     private function logIn($data){
         //Select only the desired data
-        $partData = array(
-            "userId" => $data["id"],
-            "username" => $data["username"],
-            "email" => $data["email"],
-            "permissions" => $data["permissions"]
-        );
-        $this->session->set_userdata($partData);
+        $this->session->set_userdata(array("loggedUser" => $data));
         return true;
     }
     /* ------INPUT_FETCH-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -25,13 +19,23 @@ class Signing extends Head_Controller{
     }
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    public function signOut(){
+        $this->session->unset_userdata("loggedUser");
+        redirect("signing");
+    }
+    
     public function logByForm(){
         $userData = $this->fetchInput_signIn();
         $this->load->model("Users_model");
-        //FIXME change Users_model->getMatchingUser() to receive an array of data
-        $user = $this->Users_model->getMatchingUser($userData);
-        if($user == NULL)
+        $user = $this->Users_model->getMatchingUser(array("username" => $userData["username"]));
+        if($user == NULL){
+            $this->session->set_flashdata("error", "Specified user doesn't exist");
             redirect("signing");
+        }
+        if(!$user->equalToPassword($userData["password"])){
+            $this->session->set_flashdata("error", "Incorrect password");
+            redirect("signing");
+        }
         $this->logIn($user);
         redirect("home");
     }
