@@ -1,5 +1,9 @@
 @import url("http://cdnjs.cloudflare.com/ajax/libs/octicons/3.1.0/octicons.css");
 
+html, body{
+	height: 100%;
+}
+
 ::-webkit-input-placeholder {
    text-align: center;
 }
@@ -16,6 +20,28 @@
    text-align: center; 
 }
 
+.navbar{
+	height: 58px;
+}
+
 main{
-	padding-top: 3rem;
+	height: 100%;
+	padding-top: 58px;
+}
+
+main > .container{
+	margin-top: 3rem;
+}
+
+#chat{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 25%;
+	overflow: hidden;
+}
+
+#chat #inputMessage{
+	flex: 3;
 }

@@ -1,5 +1,5 @@
 <?php
-require_once(APPPATH."libraries/HashedPassword.php");
+require_once(APPPATH."libraries/class/HashedPassword.php");
 class HashedPassword_test extends TestCase{
     public static function setUpBeforeClass(){
         

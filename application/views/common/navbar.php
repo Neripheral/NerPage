@@ -11,7 +11,7 @@
     isset($fromController) OR $fromController = array();
     isset($fromController) OR $fromController["NAVBAR"] = array();
 ?>
-<nav class="navbar navbar-dark navbar-expand bg-dark">
+<nav class="fixed-top navbar navbar-dark navbar-expand bg-dark">
     <div class="container-fluid">
     	<div class="navbar-header">
     		<a class="navbar-brand text-light">NerPage</a>

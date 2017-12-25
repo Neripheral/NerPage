@@ -43,7 +43,6 @@ class Registration extends Head_Controller{
     
     
     public function registerUserFromForm(){
-        require_once(APPPATH."/libraries/User.php");
         $userData = $this->fetchInput_register();
         try{
             $this->registerUserFromData($userData);

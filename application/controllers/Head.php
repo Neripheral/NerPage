@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH."third_party/smarty/Smarty.class.php";
-require_once APPPATH."libraries/User.php";
+require_once APPPATH."libraries/class/User.php";
 
 /*
  * Main controller overlapping every personal controller.
@@ -11,6 +11,23 @@ class Head_Controller extends CI_Controller{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* --------PROTECTED------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    
+    
+    protected function userIsLogged(){
+        return isset($this->session->loggedUser);
+    }
+    
+    protected function setLoggedUser($user){
+        $this->session->set_userdata($user);
+    }
+    
+    protected function getLoggedUser(){
+        if($this->userIsLogged())
+            return $this->session->loggedUser;
+        else 
+            return false;
+    }
+    
     protected function fetchInput($wantedFields){
         $toReturn = array();
         foreach($wantedFields as $field)
@@ -26,7 +43,7 @@ class Head_Controller extends CI_Controller{
         
         array_push($toPass["fromController"]["NAVBAR"], array("text" => "Home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""));
         
-        if(isset($this->session->loggedUser)){ //logged
+        if($this->userIsLogged()){ //logged
             array_push($toPass["fromController"]["NAVBAR"], array("text" => $this->session->loggedUser->getUsername(), "href" => base_url("index.php/account"), "class" => "", "icon" => "octicon octicon-person"));
             array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign Out", "href" => base_url("index.php/signing/signout"), "class" => "", "icon" => "octicon octicon-link-external"));
         }else{ //unlogged

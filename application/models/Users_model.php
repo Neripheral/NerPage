@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head_model.php");
-require_once(APPPATH."libraries/User.php");
 
 class Users_model extends Head_model{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -34,7 +33,7 @@ class Users_model extends Head_model{
     /* ------UPDATE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /* ------INSERT------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    public function insert($userToAdd){
+    public function insert(){
         $userData = $userToAdd->getAsArray();
         unset($userData["id"]);
         $query = $this->getQuery_insert($userData);

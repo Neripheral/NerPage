@@ -24,6 +24,7 @@ class Signing extends Head_Controller{
         redirect("signing");
     }
     
+    
     public function logByForm(){
         $userData = $this->fetchInput_signIn();
         $this->load->model("Users_model");

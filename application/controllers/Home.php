@@ -9,7 +9,13 @@ class Home extends Head_Controller{
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function home_view(){
         $this->header_view("Home");
-        $this->load->view("home");
+        if($this->userIsLogged()){
+            $toPass = array("fromController" => array(
+                "chat" => $this->load->view("chat", null, true)
+            ));
+            $this->load->view("home_logged", $toPass);
+        }else
+            $this->load->view("home_unlogged");
         $this->footer_view();
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */

@@ -34,30 +34,36 @@ class User{
 /* ------SETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
     public function setId($userId){
         $this->userId = $id;
+        return $this;
     }
     
     
     public function setUsername($username){
         $this->username = $username;
+        return $this;
     }
     
     
     public function setEmail($email){
         $this->email = $email;
+        return $this;
     }
     
     
     public function setPermissions($permissions){
         $this->permissions = $permissions;
+        return $this;
     }
 /* ------PRIVATE-METHODS---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function setHashedPassword($password){
         $this->password->setHashedPassword($password);
+        return $this;
     }
     
     private function setAndHashPassword($password){
         $this->password->setNormalPassword($password);
         $this->password->hashStoredPassword();
+        return $this;
     }
 /* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function getAsArray(){

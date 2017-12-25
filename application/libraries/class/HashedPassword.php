@@ -57,8 +57,7 @@ class HashedPassword{
     
     public function equalTo($password){
         //@todo make sure that $password is the object of the HashedPassword or 
-        $inputClass = get_class($password);
-        if($inputClass != "HashedPassword"){
+        if(!is_object($password)){
             $password = new HashedPassword($password);
         }
         
