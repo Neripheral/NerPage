@@ -8,7 +8,7 @@ class Home extends Head_Controller{
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function home_view(){
-        $this->header_view("Home");
+        $this->header_view("Home", array("js" => array(base_url("js/chatController.js"))));
         if($this->userIsLogged()){
             $toPass = array("fromController" => array(
                 "chat" => $this->load->view("chat", null, true)

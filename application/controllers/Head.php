@@ -38,8 +38,9 @@ class Head_Controller extends CI_Controller{
     /*
      * $activeTab - string containg name of the selected tab
      */
-    protected function header_view($activeTab){
-        $toPass = array("fromController" => array("NAVBAR" => array()));
+    protected function header_view($activeTab, $codeToLoad){
+        $toPass = array("fromController" => $codeToLoad);
+        $toPass["fromController"]["NAVBAR"] = array();
         
         array_push($toPass["fromController"]["NAVBAR"], array("text" => "Home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""));
         
