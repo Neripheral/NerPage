@@ -25,7 +25,7 @@ function getLastMessageId(){
 
 function getMessages(){
 	var messageId = { lastMessageId: getLastMessageId()};
-	$.post("http://[::1]/www/NerPage/index.php/chat/ajaxGetMessages", messageId, function(dataJson, success){
+	$.post(fromController.getMessagesUrl, messageId, function(dataJson, success){
 		var data = JSON.parse(dataJson);
 		data.forEach(addMessage);
 	});
@@ -46,7 +46,7 @@ function composeMessage(){
 }
 
 function sendAjaxMessage(message){
-	$.post("http://[::1]/www/NerPage/index.php/chat/sendMessage", message);
+	$.post(fromController.sendAjaxMessageUrl, message);
 }
 
 function clearChatInput(){

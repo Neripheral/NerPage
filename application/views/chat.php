@@ -21,8 +21,9 @@
     	?>
 	</div>
 	<script>
-		phpData = {
-			"sendingUrl": "<?php echo base_url("index.php/chat/sendMessage");?>"
+		fromController = {
+			"sendAjaxMessageUrl": "<?php echo base_url("index.php/chat/sendMessage");?>",
+			"getMessagesUrl": "<?php echo base_url("index.php/chat/ajaxGetMessages");?>"
 		};
 	</script>
 </div>
