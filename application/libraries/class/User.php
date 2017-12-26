@@ -32,8 +32,8 @@ class User{
         return $this->permissions;
     }
 /* ------SETTERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-    public function setId($userId){
-        $this->userId = $id;
+    public function setId($id){
+        $this->id = $id;
         return $this;
     }
     
@@ -82,7 +82,8 @@ class User{
     }
     
     
-    public function initializeAll($username, $password, $email, $permission){
+    public function initializeAll($username, $password, $email, $permission, $id){
+        $this->setId($id);
         $this->setUsername($username);
         $this->password = new HashedPassword();
         if(preg_match('/^\$2y\$10\$.*$/', $password))
@@ -94,8 +95,8 @@ class User{
     }
     
     
-    public function __construct($username, $password, $email, $permission = "guest"){
-        $this->initializeAll($username, $password, $email, $permission);
+    public function __construct($username, $password, $email, $permission = "guest", $id = null){
+        $this->initializeAll($username, $password, $email, $permission, $id);
     }
 }
     

@@ -18,7 +18,7 @@ class Head_Controller extends CI_Controller{
     }
     
     protected function setLoggedUser($user){
-        $this->session->set_userdata($user);
+        $this->session->set_userdata(array("loggedUser" => $user));
     }
     
     protected function getLoggedUser(){
@@ -38,7 +38,7 @@ class Head_Controller extends CI_Controller{
     /*
      * $activeTab - string containg name of the selected tab
      */
-    protected function header_view($activeTab, $codeToLoad){
+    protected function header_view($activeTab, $codeToLoad = array()){
         $toPass = array("fromController" => $codeToLoad);
         $toPass["fromController"]["NAVBAR"] = array();
         

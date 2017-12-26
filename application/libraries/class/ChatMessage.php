@@ -58,7 +58,7 @@ class ChatMessage{
     
     
     public function __construct($userId, $content, $id = null){
-        $this->initializeAll($id, $userId, $content);
+        $this->initializeAll($userId, $content, $id);
     }
 }
     

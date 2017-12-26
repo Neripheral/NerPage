@@ -8,7 +8,7 @@ class Signing extends Head_Controller{
     // Flags session as logged and inserts user's data
     private function logIn($data){
         //Select only the desired data
-        $this->session->set_userdata(array("loggedUser" => $data));
+        $this->setLoggedUser($data);
         return true;
     }
     /* ------INPUT_FETCH-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */

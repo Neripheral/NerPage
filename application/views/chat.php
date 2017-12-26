@@ -1,15 +1,29 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
 <div id="chat" class="border bg-secondary d-flex flex-column-reverse">
-	<div id="chatMessages">
-	</div>
 	<form id="chatInput" class="d-flex">
 		<input type="text" id="inputMessage" placeholder="Your message...">
 		<input type="submit" value="Send">
 	</form>
+	<div id="chatMessages" class="d-flex flex-column-reverse align-items-start">
+		
+		<?php 
+		  foreach($fromController["MESSAGES"] as $message){
+               $tpl = new Smarty;
+               $tpl->template_dir = APPPATH."views\\templates\\";
+               $tpl->compile_dir = APPPATH."views\\templates_c\\";
+               
+               foreach($message as $key => $var){
+                   $tpl->assign($key, $var);
+               }
+               $tpl->display("chatMessage.tpl");
+           }
+    	?>
+	</div>
 	<script>
 		phpData = {
 			"sendingUrl": "<?php echo base_url("index.php/chat/sendMessage");?>"
 		};
 	</script>
 </div>
+

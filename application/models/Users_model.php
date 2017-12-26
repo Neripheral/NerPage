@@ -28,12 +28,12 @@ class Users_model extends Head_model{
         if(empty($data))
             return null;
         $data = $data[0];
-        return new User($data["username"], $data["password"], $data["email"], $data["permission"]);
+        return new User($data["username"], $data["password"], $data["email"], $data["permissions"], $data["id"]);
     }
     /* ------UPDATE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
     /* ------INSERT------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    public function insert(){
+    public function insert($userToAdd){
         $userData = $userToAdd->getAsArray();
         unset($userData["id"]);
         $query = $this->getQuery_insert($userData);
