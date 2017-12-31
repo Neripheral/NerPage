@@ -43,9 +43,8 @@ class Signing extends Head_Controller{
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function signIn_view(){
         $this->load->helper("form");
-        $this->header_view("Sign In");
-        $this->load->view("signin");
-        $this->footer_view();
+        
+        $this->show($this->wrap_html($this->load->view("signin", null, true), "navtab_signin"));
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function index(){

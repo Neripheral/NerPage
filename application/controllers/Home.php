@@ -8,21 +8,22 @@ class Home extends Chat{
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function home_view(){
-        
+        $codeToLoad = array();
+        $content = "";
         if($this->userIsLogged()){
-            $this->header_view("Home", array("js" => array(base_url("js/chatController.js"))));
-            $toPass = array("fromController" => array(
+            $codeToLoad = array("js" => array(base_url("js/chatController.js")));
+            $toPassChat = array("fromController" => array(
                 "MESSAGES" => $this->getMessages(0)
             ));
             $toPass = array("fromController" => array(
-                "chat" => $this->load->view("chat", $toPass, true)
+                "chat" => $this->load->view("chat", $toPassChat, true)
             ));
-            $this->load->view("home_logged", $toPass);
+            $content = $this->load->view("home_logged", $toPass, true);
         }else{
-            $this->header_view("Home");
-            $this->load->view("home_unlogged");
+            $content = $this->load->view("home_unlogged", null, true);
         }
-        $this->footer_view();
+        
+        $this->show($this->wrap_html($content, "navtab_home", $codeToLoad));
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function index(){

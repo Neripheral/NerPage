@@ -58,9 +58,8 @@ class Registration extends Head_Controller{
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function register_view(){
         $this->load->helper("form");
-        $this->header_view("Register");
-        $this->load->view("registration");
-        $this->footer_view();
+        
+        $this->show($this->wrap_html($this->load->view("registration", null, true), "navbar_register"));
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function index(){

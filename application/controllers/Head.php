@@ -12,6 +12,9 @@ class Head_Controller extends CI_Controller{
 
 /* --------PROTECTED------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
+    /* ----<<<-USER-MANIPULATION->>>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */    
+    
+    
     
     protected function userIsLogged(){
         return isset($this->session->loggedUser);
@@ -27,6 +30,13 @@ class Head_Controller extends CI_Controller{
         else 
             return false;
     }
+   
+    
+   
+    /* ----<<<-USER-MANIPULATION->>>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    /* ----<<<-OTHERS->>>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+   
+    
     
     protected function fetchInput($wantedFields){
         $toReturn = array();
@@ -34,34 +44,67 @@ class Head_Controller extends CI_Controller{
             $toReturn[$field] = $this->input->post($field);
         return $toReturn;
     }
+   
+    protected function show($code){
+        echo $code;
+    }
     
-    /*
-     * $activeTab - string containg name of the selected tab
-     */
-    protected function header_view($activeTab, $codeToLoad = array()){
+    
+   
+    /* ----<<<-OTHERS->>>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+    /* ----<<<-WRAPPERS->>>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+   
+    
+    
+    private function getNavTabs_logged(){
+        return array(
+            array("text" => "Home", "id" => "navtab_home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""),
+            array("text" => $this->session->loggedUser->getUsername(), "id" => "navtab_account", "href" => base_url("index.php/account"), "class" => "", "icon" => "octicon octicon-person"),
+            array("text" => "Sign Out", "href" => base_url("index.php/signing/signout"), "id" => "navtab_signout", "class" => "", "icon" => "octicon octicon-link-external")
+        );
+    }
+    
+    private function getNavTabs_unlogged(){
+        return array(
+            array("text" => "Home", "id" => "navtab_home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""),
+            array("text" => "Register", "id" => "navtab_register", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"),
+            array("text" => "Sign In", "id" => "navtab_signin", "href" => base_url("index.php/signing"), "class" => "", "icon" => "octicon octicon-link-external")
+        );
+    }
+    
+    private function getHtml_header($activeTab, $codeToLoad = array()){
         $toPass = array("fromController" => $codeToLoad);
         $toPass["fromController"]["NAVBAR"] = array();
         
-        array_push($toPass["fromController"]["NAVBAR"], array("text" => "Home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""));
-        
         if($this->userIsLogged()){ //logged
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => $this->session->loggedUser->getUsername(), "href" => base_url("index.php/account"), "class" => "", "icon" => "octicon octicon-person"));
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign Out", "href" => base_url("index.php/signing/signout"), "class" => "", "icon" => "octicon octicon-link-external"));
+            $toPass["fromController"]["NAVBAR"] = $this->getNavTabs_logged();
         }else{ //unlogged
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Register", "href" => base_url("index.php/registration"), "class" => "", "icon" => "octicon octicon-clippy"));
-            array_push($toPass["fromController"]["NAVBAR"], array("text" => "Sign In", "href" => base_url("index.php/signing"), "class" => "", "icon" => "octicon octicon-link-external"));
+            $toPass["fromController"]["NAVBAR"] = $this->getNavTabs_unlogged();
         }
         
         foreach($toPass["fromController"]["NAVBAR"] as &$tab){
-            $tab["text"] == $activeTab AND $tab["class"] .= " active ";
+            $tab["id"] == $activeTab AND $tab["class"] .= " active ";
         }
-        $this->load->view("common/header", $toPass);
+        return $this->load->view("common/header", $toPass, true);
+    }
+    
+    private function getHtml_footer(){
+        return $this->load->view("common/footer", null, true);
+    }
+    
+    protected function wrap_html($code, $activeTab, $codeToLoad = array()){
+        $header = $this->getHtml_header($activeTab, $codeToLoad);
+        $footer = $this->getHtml_footer();
+        return $header.$code.$footer;
     }
     
     
-    protected function footer_view(){
-        $this->load->view("common/footer");
-    }
+    
+    /* ----<<<-WRAPPERS->>>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    /*
+     * $activeTab - string containg name of the selected tab
+     */
+    
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 

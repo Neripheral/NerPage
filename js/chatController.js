@@ -1,3 +1,22 @@
+var timeoutHandle = {
+		handle: null,
+		amount: 1000,
+		timeouts: [
+			200,
+			500,
+			1000,
+			2000,
+			5000
+		]
+};
+
+var chatRefreshTimer = {
+		handle: null,
+		get handle(){ return this.handle; },
+		set handle(handle){ this.handle = handle; },
+		
+		
+}
 function addMessage(message){
 	var newElement = `
 		<div class="p-1">
@@ -24,6 +43,7 @@ function getLastMessageId(){
 }
 
 function getMessages(){
+	window.clearTimeout(timeoutHandle);
 	var messageId = { lastMessageId: getLastMessageId()};
 	$.post(fromController.getMessagesUrl, messageId, function(dataJson, success){
 		var data = JSON.parse(dataJson);
@@ -34,7 +54,7 @@ function getMessages(){
 function loadMessages(){
 	getMessages();
 	console.log("refreshed");
-	window.setTimeout(function(){loadMessages()}, 4000);
+	timeoutHandle = window.setTimeout(function(){loadMessages()}, 4000);
 }
 
 

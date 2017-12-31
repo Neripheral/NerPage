@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="22" assertions="32" errors="1" failures="1" skipped="0" time="4.725615">
-    <testsuite name="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" tests="8" assertions="15" errors="0" failures="0" skipped="0" time="2.504938">
-      <testcase name="test_index" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="39" assertions="1" time="0.296782"/>
-      <testcase name="test_registerUserFromForm_WhenEverythingCorrect" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="44" assertions="2" time="0.371804"/>
-      <testcase name="test_registerUserFromForm_MissingUsername" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="51" assertions="2" time="0.274665"/>
-      <testcase name="test_registerUserFromForm_MissingPassword" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="60" assertions="2" time="0.270881"/>
-      <testcase name="test_registerUserFromForm_MissingEmail" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="68" assertions="2" time="0.270938"/>
-      <testcase name="test_registerUserFromForm_WhenEmailIsIncorrect" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="76" assertions="2" time="0.271364"/>
-      <testcase name="test_registerUserFromForm_WhenUsernameWasTaken" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="83" assertions="2" time="0.378617"/>
-      <testcase name="test_registerUserFromForm_WhenEmailWasTaken" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="91" assertions="2" time="0.369887"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="22" assertions="32" errors="1" failures="1" skipped="0" time="4.899897">
+    <testsuite name="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" tests="8" assertions="15" errors="0" failures="0" skipped="0" time="2.601752">
+      <testcase name="test_index" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="39" assertions="1" time="0.343751"/>
+      <testcase name="test_registerUserFromForm_WhenEverythingCorrect" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="44" assertions="2" time="0.383169"/>
+      <testcase name="test_registerUserFromForm_MissingUsername" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="51" assertions="2" time="0.274664"/>
+      <testcase name="test_registerUserFromForm_MissingPassword" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="60" assertions="2" time="0.271989"/>
+      <testcase name="test_registerUserFromForm_MissingEmail" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="68" assertions="2" time="0.277577"/>
+      <testcase name="test_registerUserFromForm_WhenEmailIsIncorrect" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="76" assertions="2" time="0.277628"/>
+      <testcase name="test_registerUserFromForm_WhenUsernameWasTaken" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="83" assertions="2" time="0.387543"/>
+      <testcase name="test_registerUserFromForm_WhenEmailWasTaken" class="Registration_test" classname="Registration_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Registration_test.php" line="91" assertions="2" time="0.385431"/>
     </testsuite>
-    <testsuite name="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" tests="5" assertions="4" errors="1" failures="0" skipped="0" time="1.321596">
-      <testcase name="test_index" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="38" assertions="1" time="0.279482"/>
-      <testcase name="test_logByForm_ExistingUser" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="43" assertions="1" time="0.370600"/>
-      <testcase name="test_logByForm_NonExistingUsername" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="48" assertions="1" time="0.303788"/>
-      <testcase name="test_logByForm_PasswordIncorrect" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="56" assertions="1" time="0.367148"/>
-      <testcase name="test_logByForm_LogOut" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="64" assertions="0" time="0.000578">
+    <testsuite name="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" tests="5" assertions="4" errors="1" failures="0" skipped="0" time="1.375348">
+      <testcase name="test_index" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="38" assertions="1" time="0.291384"/>
+      <testcase name="test_logByForm_ExistingUser" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="43" assertions="1" time="0.398939"/>
+      <testcase name="test_logByForm_NonExistingUsername" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="48" assertions="1" time="0.308534"/>
+      <testcase name="test_logByForm_PasswordIncorrect" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="56" assertions="1" time="0.375950"/>
+      <testcase name="test_logByForm_LogOut" class="Signing_test" classname="Signing_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Signing_test.php" line="64" assertions="0" time="0.000541">
         <error type="PHPUnit\Framework\RiskyTestError">Risky Test
 </error>
       </testcase>
     </testsuite>
-    <testsuite name="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.302859">
-      <testcase name="test_index" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.147617"/>
-      <testcase name="test_method_404" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.154672"/>
-      <testcase name="test_APPPATH" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.000570"/>
+    <testsuite name="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.332750">
+      <testcase name="test_index" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.180739"/>
+      <testcase name="test_method_404" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.151417"/>
+      <testcase name="test_APPPATH" class="Welcome_test" classname="Welcome_test" file="F:\xampp\htdocs\www\NerPage\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.000594"/>
     </testsuite>
-    <testsuite name="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" tests="5" assertions="10" errors="0" failures="0" skipped="0" time="0.595764">
-      <testcase name="test_correctPasswordHash" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="8" assertions="1" time="0.130929"/>
-      <testcase name="test_CompareNormalPasswords" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="14" assertions="2" time="0.000783"/>
-      <testcase name="test_compareNormalAndHashedPasswords" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="23" assertions="4" time="0.328172"/>
-      <testcase name="test_hashedPasswordsAreEqual" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="35" assertions="2" time="0.000543"/>
-      <testcase name="test_hashedPasswordEqualToString" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="43" assertions="1" time="0.135337"/>
+    <testsuite name="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" tests="5" assertions="10" errors="0" failures="0" skipped="0" time="0.589577">
+      <testcase name="test_correctPasswordHash" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="8" assertions="1" time="0.131273"/>
+      <testcase name="test_CompareNormalPasswords" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="14" assertions="2" time="0.000528"/>
+      <testcase name="test_compareNormalAndHashedPasswords" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="23" assertions="4" time="0.325978"/>
+      <testcase name="test_hashedPasswordsAreEqual" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="35" assertions="2" time="0.000509"/>
+      <testcase name="test_hashedPasswordEqualToString" class="HashedPassword_test" classname="HashedPassword_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\HashedPassword_test.php" line="43" assertions="1" time="0.131289"/>
     </testsuite>
-    <testsuite name="User_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\User_test.php" tests="1" assertions="0" errors="0" failures="1" skipped="0" time="0.000458">
-      <testcase name="Warning" assertions="0" time="0.000458">
+    <testsuite name="User_test" file="F:\xampp\htdocs\www\NerPage\application\tests\libraries\class\User_test.php" tests="1" assertions="0" errors="0" failures="1" skipped="0" time="0.000471">
+      <testcase name="Warning" assertions="0" time="0.000471">
         <warning type="PHPUnit\Framework\Warning">Warning
 No tests found in class "User_test".
 
