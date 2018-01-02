@@ -47,7 +47,6 @@ class ChatMessage_model extends Head_model{
             "content"
         );
         $query = $this->getQuery_joinUsers($queryChatMessages, $columns, "userId=Users.id");
-log_message("debug", $query);
         return $this->db->query($query)->result_array();
     }
     

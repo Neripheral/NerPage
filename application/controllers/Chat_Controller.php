@@ -4,13 +4,13 @@ require_once("Head.php");
 require_once(APPPATH."libraries/class/ChatMessage.php");
 
 
-class Chat extends Head_Controller{
+class Chat_Controller extends Head{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------INPUT_FETCH-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    private function fetchInput_sendMessage(){
+    /*private function fetchInput_sendMessage(){
         $wantedFields = array("message");
-        $messageData = $this->fetchInput($wantedFields);
+        $messageData = $this->fetchdata->fetchInput($wantedFields);
         return $messageData;
     }
     
@@ -36,8 +36,31 @@ class Chat extends Head_Controller{
         echo $value;
     }
     
-    public function show_chat_view(){
+    public function chat_view($returnContent = false){
+        $toPass = array("fromController" => array(
+            "MESSAGES" => $this->getMessages(0)
+        ));
+        $content = $this->load->view("chat", $toPass, true);
         
+        if($returnContent)
+            return $content;
+        else
+            $this->show(
+                $this->wrap_html(
+                    $content, 
+                    "navbar_chat"          
+                )
+            );
+    }*/
+    
+    public function sendMessage(){
+        $this->load->library("chat");
+        $this->chat->sendMessage();
+    }
+        
+    public function ajaxGetMessages(){
+        $this->load->library("chat");
+        return $this->chat->ajaxGetMessages();
     }
 }
 

@@ -1,22 +1,3 @@
-var timeoutHandle = {
-		handle: null,
-		amount: 1000,
-		timeouts: [
-			200,
-			500,
-			1000,
-			2000,
-			5000
-		]
-};
-
-var chatRefreshTimer = {
-		handle: null,
-		get handle(){ return this.handle; },
-		set handle(handle){ this.handle = handle; },
-		
-		
-}
 function addMessage(message){
 	var newElement = `
 		<div class="p-1">
@@ -43,9 +24,8 @@ function getLastMessageId(){
 }
 
 function getMessages(){
-	window.clearTimeout(timeoutHandle);
 	var messageId = { lastMessageId: getLastMessageId()};
-	$.post(fromController.getMessagesUrl, messageId, function(dataJson, success){
+	$.post("http://[::1]/www/NerPage/index.php/chat/ajaxGetMessages", messageId, function(dataJson, success){
 		var data = JSON.parse(dataJson);
 		data.forEach(addMessage);
 	});
@@ -54,7 +34,7 @@ function getMessages(){
 function loadMessages(){
 	getMessages();
 	console.log("refreshed");
-	timeoutHandle = window.setTimeout(function(){loadMessages()}, 4000);
+	window.setTimeout(function(){loadMessages()}, 4000);
 }
 
 
@@ -66,7 +46,7 @@ function composeMessage(){
 }
 
 function sendAjaxMessage(message){
-	$.post(fromController.sendAjaxMessageUrl, message);
+	$.post("http://[::1]/www/NerPage/index.php/chat/sendMessage", message);
 }
 
 function clearChatInput(){

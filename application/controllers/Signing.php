@@ -2,25 +2,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head.php");
 
-class Signing extends Head_Controller{
+class Signing extends Head{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     // Flags session as logged and inserts user's data
     private function logIn($data){
         //Select only the desired data
-        $this->setLoggedUser($data);
+        $this->usermanager->signUserIn($data);
         return true;
     }
     /* ------INPUT_FETCH-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     private function fetchInput_signIn(){
         $wantedFields = array("username", "password");
-        $toReturn = $this->fetchInput($wantedFields);
+        $toReturn = $this->fetchdata->fetchInput($wantedFields);
         return $toReturn;
     }
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function signOut(){
-        $this->session->unset_userdata("loggedUser");
+        $this->usermanager->signUserOut();
         redirect("signing");
     }
     
@@ -44,7 +44,12 @@ class Signing extends Head_Controller{
     public function signIn_view(){
         $this->load->helper("form");
         
-        $this->show($this->wrap_html($this->load->view("signin", null, true), "navtab_signin"));
+        $this->codebuilder->show(
+            $this->codebuilder->wrap_html(
+                $this->load->view("signin", null, true), 
+                "navtab_signin"
+            )
+        );
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function index(){
