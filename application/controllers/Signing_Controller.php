@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head.php");
 
-class Signing extends Head{
+class Signing_Controller extends Head{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     // Flags session as logged and inserts user's data
@@ -26,14 +26,16 @@ class Signing extends Head{
     
     
     public function logByForm(){
-        $userData = $this->fetchInput_signIn();
+        $input = $userData = $this->fetchInput_signIn();
+        unset($userData["password"]);
+        $user = new User($userData);
         $this->load->model("Users_model");
-        $user = $this->Users_model->getMatchingUser(array("username" => $userData["username"]));
+        $user = $this->Users_model->getMatchingUser($user);
         if($user == NULL){
             $this->session->set_flashdata("error", "Specified user doesn't exist");
             redirect("signing");
         }
-        if(!$user->equalToPassword($userData["password"])){
+        if(!$user->equalToPassword($input["password"])){
             $this->session->set_flashdata("error", "Incorrect password");
             redirect("signing");
         }
@@ -44,12 +46,10 @@ class Signing extends Head{
     public function signIn_view(){
         $this->load->helper("form");
         
-        $this->codebuilder->show(
-            $this->codebuilder->wrap_html(
-                $this->load->view("signin", null, true), 
-                "navtab_signin"
-            )
-        );
+        $this->codebuilder->setKeyword("signin")
+                            ->append_section("signin")
+                            ->wrap_all()
+                            ->show();
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function index(){

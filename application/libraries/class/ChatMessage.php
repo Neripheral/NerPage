@@ -1,7 +1,7 @@
 <?php 
 defined("BASEPATH") OR exit("No direct script access allowed");
 
-class ChatMessage{
+class ChatMessage extends TableModel{
 /* ------PROPERTIES--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     private $id;
     private $userId;
@@ -39,7 +39,7 @@ class ChatMessage{
     }
 /* ------PRIVATE-METHODS---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
-/* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ------TABLEMODEL-OVERLOADING--------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function getAsArray(){
         return array(
             "id" => $this->getId(),
@@ -49,16 +49,23 @@ class ChatMessage{
     }
     
     
-    public function initializeAll($userId, $content, $id){
-        $this->setId($id);
-        $this->setUserId($userId);
-        $this->setContent($content);
+    public function getAsArray_insert(){
+        $data = $this->getAsArray();
+        unset($data["id"]);
+        return $data;
+    }
+/* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    public function initializeAll(){
+        $this->setId(null);
+        $this->setUserId(null);
+        $this->setContent(null);
         return $this;
     }
     
     
-    public function __construct($userId, $content, $id = null){
-        $this->initializeAll($userId, $content, $id);
+    public function __construct($msgData){
+        $this->initializeAll();
+        $this->setAll($msgData);
     }
 }
     

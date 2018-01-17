@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head.php");
 
-class Registration extends Head{
+class Registration_Controller extends Head{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     private function registerInDatabase($user){
@@ -37,7 +37,7 @@ class Registration extends Head{
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function registerUserFromData($userData){
         $this->validateUserData($userData);
-        $user = new User($userData["username"], $userData["password"], $userData["email"]);
+        $user = new User($userData);
         return $this->registerInDatabase($user);
     }
     
@@ -58,13 +58,10 @@ class Registration extends Head{
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function register_view(){
         $this->load->helper("form");
-        
-        $this->codebuilder->show(
-            $this->codebuilder->wrap_html(
-                $this->load->view("registration", null, true), 
-                "navbar_register"
-            )
-        );
+        $this->codebuilder->setKeyword("register")
+                            ->append_section("registration")
+                            ->wrap_all()
+                            ->show();
     }
     /* ------INDEX-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function index(){

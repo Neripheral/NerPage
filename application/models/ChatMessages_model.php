@@ -1,16 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head_model.php");
+require_once(APPPATH."libraries/class/ChatMessage.php");
 
-class ChatMessage_model extends Head_model{
+class ChatMessages_model extends Head_model{
 /* --------PRIVATE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------OTHERS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------QUERIES------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
-    public function getQuery_insert($messageData){
-        return $this->db->set($messageData)->get_compiled_insert("ChatMessages");
-    }
-    
     public function getQuery_joinUsers($query, $columns, $joinOn){
         $this->db->select(implode(",", $columns));
         $this->db->from("(".$query.") as ChatMessages");
@@ -18,14 +15,12 @@ class ChatMessage_model extends Head_model{
         return $this->db->get_compiled_select();
     }
     
-    public function getQuery_select($columns, $lastMessageId = 0){
-        if(!is_int($lastMessageId))
-            return false;
+    public function getQuery_select($columns, $lastMessageId, $dbTable){
         $this->db->select(implode(",", $columns));
         $this->db->where("id > $lastMessageId");
         $this->db->order_by("id", "DESC");
         $this->db->limit(30);
-        return $this->db->get_compiled_select("ChatMessages");
+        return $this->db->get_compiled_select($dbTable);
     }
     /* ------SELECT------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
@@ -40,20 +35,20 @@ class ChatMessage_model extends Head_model{
             "userId",
             "content"
         );
-        $queryChatMessages = $this->getQuery_select($columns, $lastMessageId);
+        $queryChatMessages = $this->getQuery_select($columns, $lastMessageId, "ChatMessages");
         $columns = array(
             "ChatMessages.id",
             "username",
             "content"
         );
         $query = $this->getQuery_joinUsers($queryChatMessages, $columns, "userId=Users.id");
-        return $this->db->query($query)->result_array();
+        $messages = $this->db->query($query)->result_array();
+        return $messages;
     }
     
     public function insert($messageToAdd){
-        $messageData = $messageToAdd->getAsArray();
-        unset($messageData["id"]);
-        $query = $this->getQuery_insert($messageData);
+        $query = $this->getQuery_insert($messageToAdd, "ChatMessages");
+        log_message("debug", $query);
         $this->db->query($query);
         $error = $this->db->error();
         if($error["code"] == 0)

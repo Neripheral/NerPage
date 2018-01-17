@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once("Head_Library.php");
 
-class UserManager{
-    private $ci;
-    
+class UserManager extends Head_Library{
     public function userIsLogged(){
         return isset($this->ci->session->loggedUser);
     }
@@ -21,10 +20,5 @@ class UserManager{
             return $this->ci->session->loggedUser;
         else
             return false;
-    }
-    
-    
-    public function __construct(){
-        $this->ci = &get_instance();
     }
 }

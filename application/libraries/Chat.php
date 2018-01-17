@@ -1,57 +1,34 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH."third_party/smarty/Smarty.class.php";
 require_once(APPPATH."libraries/class/ChatMessage.php");
+require_once("Head_Library.php");
 
-
-class Chat{
-    private $ci;     
-
-    private function fetchInput_sendMessage(){
-        $wantedFields = array("message");
-        $messageData = $this->ci->fetchdata->fetchInput($wantedFields);
-        return $messageData;
-    }
-    
-    public function sendMessage(){
-        $messageData = $this->fetchInput_sendMessage();
-        $chatMessage = new ChatMessage($this->ci->usermanager->getLoggedUser()->getId(), $messageData["message"]);
+class Chat extends Head_Library{
+    public function sendMessage($userId, $content){
+        $chatMessage = new ChatMessage(array("userId" => $userId, "content" => $content));
         
-        $this->ci->load->model("ChatMessage_model");
-        $this->ci->ChatMessage_model->insert($chatMessage);
+        $this->ci->load->model("ChatMessages_model");
+        $this->ci->ChatMessages_model->insert($chatMessage);
     }
     
-    public function getMessages($lastMessageId = null){
-        log_message("debug", "testing");
-        if($lastMessageId === null)
-            $lastMessageId = intval($this->ci->input->post("lastMessageId"));
-            log_message("debug", "testing");
-        $this->ci->load->model("ChatMessage_model");
-        return $this->ci->ChatMessage_model->get($lastMessageId);
+    public function getMessages($lastMessageId){
+        if(!is_int($lastMessageId))
+            return false;
+        $this->ci->load->model("ChatMessages_model");
+        return $this->ci->ChatMessages_model->get($lastMessageId);
     }
     
-    public function ajaxGetMessages(){
-        $value = json_encode($this->getMessages());
-        echo $value;
+    public function ajaxGetMessages($lastMessageId = 0){
+        $messages = $this->getMessages($lastMessageId);
+        $jsonData = json_encode($messages);
+        return $jsonData;
     }
     
-    public function get_chat_view($returnContent = true){
-        $toPass = array("fromController" => array(
+    public function get_chat_section(){
+        $toPass = array(
             "MESSAGES" => $this->getMessages(0)
-        ));
-        $content = $this->ci->load->view("chat", $toPass, true);
-        
-        if($returnContent)
-            return $content;
-        else
-            $this->ci->codebuilder->show(
-                $this->ci->codebuilder->wrap_html(
-                    $content,
-                    "navbar_chat"
-                )
-            );
-    }
-    
-    public function __construct(){
-        $this->ci = &get_instance();
+        );
+        return $this->ci->codebuilder->prepareSection(array("chat", $toPass), "chat");
     }
 }

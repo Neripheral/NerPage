@@ -3,7 +3,6 @@ class Registration_test extends TestCase{
     public $postData;
     
     private static function resetDatabase(&$ci){
-        fwrite(STDERR, print_r("TRUNCATING", TRUE));
         $ci->db->truncate("Users");
         $data = array(
             "username" => "taken_username",
@@ -38,7 +37,7 @@ class Registration_test extends TestCase{
     
     public function test_index(){
 		$output = $this->request("GET", "registration/index");
-		$this->assertContains("<h1>Registration</h1>", $output);
+		$this->assertContains("main_register", $output);
 	}
 	
 	public function test_registerUserFromForm_WhenEverythingCorrect(){

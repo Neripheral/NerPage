@@ -24,8 +24,10 @@ function getLastMessageId(){
 }
 
 function getMessages(){
-	var messageId = { lastMessageId: getLastMessageId()};
+	var messageId = { lastMessageId: getLastMessageId() };
+	console.log(messageId);
 	$.post("http://[::1]/www/NerPage/index.php/chat/ajaxGetMessages", messageId, function(dataJson, success){
+		console.log("dane:"+dataJson);
 		var data = JSON.parse(dataJson);
 		data.forEach(addMessage);
 	});
@@ -34,14 +36,14 @@ function getMessages(){
 function loadMessages(){
 	getMessages();
 	console.log("refreshed");
-	window.setTimeout(function(){loadMessages()}, 4000);
+	//window.setTimeout(function(){loadMessages()}, 4000);
 }
 
 
 
 function composeMessage(){
 	return {
-		"message": $("#inputMessage").val()	
+		"content": $("#inputMessage").val()	
 	};
 }
 

@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-    	</div>
-    </body>
+<!DOCTYPE html>
+<html>
+	<?php echo $fromController["content"]; ?>
 </html>

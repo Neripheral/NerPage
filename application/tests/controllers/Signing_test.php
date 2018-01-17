@@ -3,7 +3,6 @@ class Signing_test extends TestCase{
     public $postData;
     
     private static function resetDatabase(&$ci){
-        fwrite(STDERR, print_r("TRUNCATING", TRUE));
         $ci->db->truncate("Users");
         $data = array(
             "username" => "test_username",
@@ -37,7 +36,7 @@ class Signing_test extends TestCase{
     
     public function test_index(){
 		$output = $this->request("GET", "signing/index");
-		$this->assertContains("<h1>Sign In</h1>", $output);
+		$this->assertContains("main_signin", $output);
 	}
 	
 	public function test_logByForm_ExistingUser(){
@@ -59,9 +58,5 @@ class Signing_test extends TestCase{
 	    $this->request("POST", "signing/logByForm", $this->postData);
 	    //@todo check if error message was shown
 	    $this->assertRedirect("signing");
-	}
-	
-	public function test_logByForm_LogOut(){
-	    
 	}
 }

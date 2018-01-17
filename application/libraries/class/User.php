@@ -1,8 +1,9 @@
 <?php 
 defined("BASEPATH") OR exit("No direct script access allowed");
+require_once("TableModel.php");
 require_once("HashedPassword.php");
 
-class User{
+class User extends TableModel{
 /* ------PROPERTIES--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     private $id;
     private $username;
@@ -14,12 +15,19 @@ class User{
         return $this->id;
     }
     
+    
     public function getUsername(){
         return $this->username;
     }
     
+    
+    private function getPasswordEx(){
+        return $this->password;
+    }
+ 
+    
     public function getPassword(){
-        return $this->password->getPassword();
+        return $this->getPasswordEx()->getPassword();
     }
     
     
@@ -44,6 +52,11 @@ class User{
     }
     
     
+    private function setPasswordEx($hashedPassword){
+        $this->password = $hashedPassword;
+    }
+    
+    
     public function setEmail($email){
         $this->email = $email;
         return $this;
@@ -54,49 +67,71 @@ class User{
         $this->permissions = $permissions;
         return $this;
     }
-/* ------PRIVATE-METHODS---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    public function setHashedPassword($password){
-        $this->password->setHashedPassword($password);
+    /* ------EXTENDED-SETTERS--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    public function setHashedPassword($passwordToSet){
+        $password = $this->getPasswordEx();
+        $password->setHashedPassword($passwordToSet);
+        $this->setPasswordEx($password);
         return $this;
     }
     
-    private function setAndHashPassword($password){
-        $this->password->setNormalPassword($password);
-        $this->password->hashStoredPassword();
+    
+    private function setAndHashPassword($passwordToSet){
+        $password = $this->getPasswordEx();
+        $password->setNormalPassword($passwordToSet);
+        $password->hashStoredPassword();
+        $this->setPasswordEx($password);
         return $this;
     }
-/* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+    
+    
+    public function setPassword($password){
+        if(preg_match('/^\$2y\$10\$.*$/', $password))
+            $this->setHashedPassword($password);
+        else
+            $this->setAndHashPassword($password);
+        return $this;
+    }
+/* ------TABLEMODEL-OVERLOADING--------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function getAsArray(){
-        return array(
+        $data = array(
             "id" => $this->getId(),
             "username" => $this->getUsername(),
             "password" => $this->getPassword(),
             "email" => $this->getEmail(),
             "permissions" => $this->getPermissions()
         );
+        foreach($data as $key => $value)
+            if($value === null)
+                unset($data[$key]);
+        
+        return $data;            
     }
     
     
+    public function getAsArray_insert(){
+        $data = $this->getAsArray();
+        unset($data["id"]);
+        return $data;
+    }
+/* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function equalToPassword($password){
-        return $this->password->equalTo($password);
+        return $this->getPasswordEx()->equalTo($password);
+    }
+    
+
+    public function initializeAll(){
+        $this->setId(null);
+        $this->setUsername(null);
+        $this->setPasswordEx(new HashedPassword());
+        $this->setEmail(null);
+        $this->setPermissions(null);
     }
     
     
-    public function initializeAll($username, $password, $email, $permission, $id){
-        $this->setId($id);
-        $this->setUsername($username);
-        $this->password = new HashedPassword();
-        if(preg_match('/^\$2y\$10\$.*$/', $password))
-            $this->setHashedPassword($password);
-        else
-            $this->setAndHashPassword($password);
-        $this->setEmail($email);
-        $this->setPermissions($permission);
-    }
-    
-    
-    public function __construct($username, $password, $email, $permission = "guest", $id = null){
-        $this->initializeAll($username, $password, $email, $permission, $id);
+    public function __construct($userData){
+        $this->initializeAll();
+        $this->setAll($userData);
     }
 }
     
