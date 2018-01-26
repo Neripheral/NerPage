@@ -7,6 +7,6 @@
 ?>
 
 
-<main id='<?php echo $fromController["id"]; ?>'>
+<main id='<?php echo $fromController["id"]; ?>' class='d-flex'>
 	<?php echo $fromController["content"]; ?>
 </main>

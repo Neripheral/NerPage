@@ -20,6 +20,10 @@ html, body{
    text-align: center; 
 }
 
+#root{
+	height: 100vh;
+}
+
 .navbar{
 	height: 58px;
 }
@@ -33,18 +37,23 @@ main > .container{
 	margin-top: 3rem;
 }
 
-#chat{
-	position: absolute;
-	top: 0;
-	left: 0;
+section{
 	height: 100%;
-	width: 25%;
+	flex-basis: 20%;
+	flex-grow: 1;
+}
+
+#section_newsfeed{
+	flex-grow: 4;
+}
+
+#chat{
+	height: 100%;
 	overflow: hidden;
 }
 
 #chatInput{
 	flex-shrink: 0;
-	/*height: 4rem;*/
 }
 
 #chat #inputMessage{
@@ -54,4 +63,31 @@ main > .container{
 #chatMessages{
 	flex-shrink: 0;
 	overflow: hidden;
+}
+
+#newsfeed textarea{
+	height: 7em;
+}
+
+#posts{
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.post > *{
+	overflow: auto;
+}
+
+#postInput > div{
+	overflow: auto;
+}
+
+#addPostButton{
+	display: inline;
+	float: right;
+	cursor: pointer;	
+}
+
+#addPostButton input{
+	cursor: inherit;
 }

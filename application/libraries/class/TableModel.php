@@ -14,5 +14,6 @@ abstract class TableModel{
             if(method_exists($this, $funcName))
                 call_user_func(array($this, $funcName), $value);
         }
+        return $this;
     }
 }

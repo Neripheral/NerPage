@@ -126,6 +126,7 @@ class User extends TableModel{
         $this->setPasswordEx(new HashedPassword());
         $this->setEmail(null);
         $this->setPermissions(null);
+        return $this;
     }
     
     

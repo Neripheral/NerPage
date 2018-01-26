@@ -1,4 +1,8 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php
+    defined('BASEPATH') OR exit('No direct script access allowed');
+    isset($fromController) OR $fromController = array();
+    isset($fromController["MESSAGES"]) OR $fromController["MESSAGES"] = array();
+?>
 
 <div id="chat" class="border bg-secondary d-flex flex-column-reverse">
 	<form id="chatInput" class="d-flex">

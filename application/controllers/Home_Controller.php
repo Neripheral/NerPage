@@ -9,10 +9,15 @@ class Home_Controller extends Head{
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function home_logged_view(){
         $this->load->library("chat");
+        $this->load->library("newsfeed");
         
-        $content = $this->chat->get_chat_section();
+        $content = array(
+            $this->chat->get_chat_section(),
+            $this->newsfeed->get_newsfeed_section(),
+            "<section id='placeholder'>placeholder</section>"
+        );
         $this->codebuilder->setKeyword("home_logged")
-                            ->appendCode($content)
+                            ->appendCode(implode("", $content))
                             ->add_head(base_url("js/chatController.js"))
                             ->wrap_all()
                             ->show();
