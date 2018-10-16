@@ -47,7 +47,7 @@ class Signing_Controller extends Head{
         $this->load->helper("form");
         
         $this->codebuilder->setKeyword("signin")
-                            ->append_section("signin")
+                            ->append_section("signin")->addJs()
                             ->wrap_all()
                             ->show();
     }

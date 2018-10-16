@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAa;EACZ,OAAO,EAAC,YAAY;EAEpB,KAAK,EAAE,IAAI;EAEX,eAAE;IACD,MAAM,EAAE,IAAI;IACZ,OAAO,EAAE,YAAY;EAGtB,+BAAiB;IAChB,KAAK,EAAE,GAAG;EAGX,oBAAM;IACL,KAAK,EAAE,EAAE",
+"sources": ["../../scss/to_compile/sections/panels.scss"],
+"names": [],
+"file": "panels.css"
+}

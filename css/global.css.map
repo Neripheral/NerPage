@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,QAAQ;EACP,cAAc,EAAE,MAAM;;AAGvB,UAAW;EACV,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,MAAM;;AAGnB,WAAW;EACV,MAAM,EAAE,KAAK;;AAGd,IAAI;EACH,MAAM,EAAE,IAAI;EACZ,WAAW,EAAE,IAAI;;AAGlB,OAAO;EACN,UAAU,EAAE,GAAG;EACf,SAAS,EAAE,CAAC",
+"sources": ["../scss/to_compile/global.scss"],
+"names": [],
+"file": "global.css"
+}

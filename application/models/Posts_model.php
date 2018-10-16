@@ -20,7 +20,6 @@ class Posts_model extends Head_model{
         $this->db->where(array("postId" => $postId, "ratingType" => _RATING_DOWNVOTE_));
         $downvoteCount = $this->db->count_all_results("PostRating", true);
         
-        log_message("debug", var_export(get_defined_vars(), true));
         $totalCount = $upvoteCount - $downvoteCount;
         
         $this->db->set(array("rating" => $totalCount));

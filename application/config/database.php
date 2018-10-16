@@ -72,12 +72,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
+$hostIp = '145.239.83.77';
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=164.132.104.34; dbname=NerPage; charset=utf8;',
-	'hostname' => 'mysql:host=164.132.104.34',
+	'dsn'	=> 'mysql:host='.$hostIp.'; dbname=NerPage; charset=utf8mb4;',
+	'hostname' => 'mysql:host='.$hostIp,
 	'username' => 'phpAccess_OP',
-	'password' => 'Mp0wWfbLOA6PvleT',
+	'password' => 'Mp0wWfbLO%A6PvleT',
 	'database' => 'NerPage',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -85,8 +86,8 @@ $db['default'] = array(
 	'db_debug' => false,//(ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
+	'char_set' => 'utf8mb4',
+	'dbcollat' => 'utf8mb4_unicode_ci',
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
@@ -96,10 +97,10 @@ $db['default'] = array(
 );
 
 $db['testing'] = array(
-    'dsn'	=> 'mysql:host=164.132.104.34; dbname=NerPage_Test; charset=utf8;',
-    'hostname' => 'mysql:host=164.132.104.34',
+    'dsn'	=> 'mysql:host='.$hostIp.'; dbname=NerPage_Test; charset=utf8;',
+    'hostname' => 'mysql:host='.$hostIp,
     'username' => 'phpAccess_OP',
-    'password' => 'Mp0wWfbLOA6PvleT',
+    'password' => 'Mp0wWfbLO%A6PvleT',
     'database' => 'NerPage_Test',
     'dbdriver' => 'pdo',
     'dbprefix' => '',
@@ -107,8 +108,8 @@ $db['testing'] = array(
     'db_debug' => false,//(ENVIRONMENT !== 'production'),
     'cache_on' => FALSE,
     'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
+    'char_set' => 'utf8mb4',
+    'dbcollat' => 'utf8mb4_unicode_ci',
     'swap_pre' => '',
     'encrypt' => FALSE,
     'compress' => FALSE,

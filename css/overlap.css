@@ -1,5 +1,6 @@
 @import url("http://cdnjs.cloudflare.com/ajax/libs/octicons/3.1.0/octicons.css");
 
+/*
 html, body{
 	height: 100%;
 }
@@ -8,11 +9,11 @@ html, body{
    text-align: center;
 }
 
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder { 
    text-align: center;  
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
+::-moz-placeholder {  
    text-align: center;  
 }
 
@@ -28,20 +29,11 @@ html, body{
 	height: 58px;
 }
 
-main{
-	height: 100%;
-	padding-top: 58px;
-}
-
 main > .container{
-	margin-top: 3rem;
+	
 }
 
-section{
-	height: 100%;
-	flex-basis: 20%;
-	flex-grow: 1;
-}
+
 
 #section_newsfeed{
 	flex-grow: 4;
@@ -90,4 +82,4 @@ section{
 
 #addPostButton input{
 	cursor: inherit;
-}
+}*/

@@ -111,6 +111,7 @@ class User extends TableModel{
     
     public function getAsArray_insert(){
         $data = $this->getAsArray();
+        log_message('debug', var_export($data, true));
         unset($data["id"]);
         return $data;
     }

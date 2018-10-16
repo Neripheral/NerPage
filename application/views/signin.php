@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<main>
-	<div class="container">
-    	<div class="row bg-light text-center p-3">
+<div class="container">
+    <div class="jumbotron">
+    	<div class="row">
         	<div class="col">
         		<h1>Sign In</h1>
         		<hr>
@@ -30,4 +30,4 @@
         	</div>
         </div>
     </div>
-</main>
+</div>

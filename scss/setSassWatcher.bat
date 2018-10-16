@@ -1,0 +1,1 @@
+sass --watch to_compile:..\css

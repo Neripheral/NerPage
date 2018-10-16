@@ -25,7 +25,8 @@ class Home_Controller extends Head{
     
     public function home_unlogged_view(){
         $this->codebuilder->setKeyword("home_unlogged")
-                            ->append_section("home_unlogged")
+                            ->addCss()
+                            ->append_section()
                             ->wrap_all()
                             ->show();
     }

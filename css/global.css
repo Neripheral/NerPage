@@ -1,0 +1,19 @@
+.octicon {
+  vertical-align: middle; }
+
+.jumbotron {
+  margin: 3rem;
+  text-align: center; }
+
+#root, main {
+  height: 100vh; }
+
+main {
+  height: 100%;
+  padding-top: 58px; }
+
+section {
+  flex-basis: 20%;
+  flex-grow: 1; }
+
+/*# sourceMappingURL=global.css.map */

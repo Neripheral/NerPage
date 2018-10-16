@@ -7,6 +7,6 @@
 
 <body>
 	<div id="root">
-		<?php echo $fromController["content"]; ?>
+	  <?php echo $fromController["content"]; ?>
 	</div>
 </body>

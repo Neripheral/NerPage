@@ -1,0 +1,12 @@
+.panelContent {
+  display: inline-block;
+  width: 100%; }
+  .panelContent * {
+    height: 100%;
+    display: inline-block; }
+  .panelContent .panelDescription {
+    width: 90%; }
+  .panelContent button {
+    width: 5%; }
+
+/*# sourceMappingURL=panels.css.map */

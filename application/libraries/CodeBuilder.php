@@ -6,7 +6,8 @@ class CodeBuilder extends Head_Library{
     private $code;
     private $keyword;
     private $flags;
-    
+    private $js;
+    private $css;
     
     
     private function getCode(){
@@ -42,10 +43,36 @@ class CodeBuilder extends Head_Library{
 
     
     
+    private function getJs(){
+        return $this->js;
+    }
+    
+    
+    private function setJs($js){
+        $this->js = $js;
+        return $this;
+    }
+    
+    
+    
+    private function getCss(){
+        return $this->css;
+    }
+    
+    
+    private function setCss($css){
+        $this->css = $css;
+        return $this;
+    }
+    
+    
+    
     private function setInitValues(){
         $this->setCode("");
         $this->setKeyword("undefined");
         $this->setFlags(array());
+        $this->setJs(array());
+        $this->setCss(array());
         return $this;
     }
     
@@ -64,6 +91,26 @@ class CodeBuilder extends Head_Library{
     
     private function setCalled($name){
         array_push($this->flags, $name);
+        return $this;
+    }
+    
+    
+    
+    public function addJs($jsPath = null){
+        if($jsPath === null)
+            $jsPath = base_url('js/sections/').$this->getKeyword().".js";
+        $js = $this->getJs();
+        array_push($js, $jsPath);
+        $this->setJs($js);
+        return $this;
+    }
+    
+    public function addCss($cssPath = null){
+        if($cssPath === null)
+            $cssPath = base_url('css/sections/').$this->getKeyword().".css";
+        $css = $this->getCss();
+        array_push($css, $cssPath);
+        $this->setCss($css);
         return $this;
     }
     
@@ -119,7 +166,9 @@ class CodeBuilder extends Head_Library{
     
     
     
-    public function prepareSection($views, $id = null){
+    public function prepareSection($views = null, $id = null){
+        if($views === null)
+            $views = $this->getKeyword();
         if($id === null)
             $id = $this->getKeyword();
         if(!preg_match('/^section_/', $id))
@@ -141,7 +190,7 @@ class CodeBuilder extends Head_Library{
      * $views[0-?][0] - (string) Name of the view
      *            [1] - (array) variables to pass
      */
-    public function append_section($views, $id = null){
+    public function append_section($views = null, $id = null){
         $section = $this->prepareSection($views, $id);
         $this->appendCode($section);
         return $this;
@@ -156,6 +205,7 @@ class CodeBuilder extends Head_Library{
     private function getNavTabs_logged(){
         return array(
             array("text" => "Home", "id" => "navtab_home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""),
+            array("text" => "Panels", "id" => "navtab_panelsList", "href" => base_url("index.php/panelsList"), "class" => "", "icon" => "octicon octicon-browser"),
             array("text" => $this->ci->session->loggedUser->getUsername(), "id" => "navtab_account", "href" => base_url("index.php/account"), "class" => "", "icon" => "octicon octicon-person"),
             array("text" => "Sign Out", "id" => "navtab_signout", "href" => base_url("index.php/signing/signout"), "class" => "", "icon" => "octicon octicon-link-external")
         );
@@ -228,15 +278,8 @@ class CodeBuilder extends Head_Library{
         if(!$this->wasCalled("body"))
             $this->wrap_body();
         
-        if($js === null)
-            $js = array();
-        if($css === null)
-            $css = array();
-        
-        if(!is_array($js))
-            $js = array($js);
-        if(!is_array($css))
-            $js = array($css);
+        $js = array_merge($this->getJs(), (array)$js);
+        $css = array_merge($this->getCss(), (array)$css);
             
         $toPass = array("fromController" => array());
         $toPass["fromController"]["js"] = $js;
