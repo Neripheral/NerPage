@@ -52,5 +52,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home_Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['^([^\/]+)$'] = '$1_Controller';
-$route['^([^\/]+)(\/.+)$'] = '$1_Controller$2';
+$route['^(?i)([^\/]+)$'] = '$1_Controller';
+$route['^(?i)([^\/]+)(\/.+)$'] = '$1_Controller$2';
