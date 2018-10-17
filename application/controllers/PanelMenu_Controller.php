@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH."third_party/smarty/Smarty.class.php";
 require_once("Head.php");
 
-class PanelsList_Controller extends Head{
+class PanelMenu_Controller extends Head{
     public function panelsList_view(){
         $this->load->model('Panels_model');
         $dataToPass = array('PANELS' => $this->Panels_model->getList($this->usermanager->getLoggedUser()->getId()));

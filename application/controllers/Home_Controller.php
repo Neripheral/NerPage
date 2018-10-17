@@ -8,17 +8,18 @@ class Home_Controller extends Head{
 /* --------PUBLIC---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /* ------VIEW--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     public function home_logged_view(){
-        $this->load->library("chat");
-        $this->load->library("newsfeed");
+        //$this->load->library("chat");
+        //$this->load->library("newsfeed");
         
-        $content = array(
+        /*$content = array(
             $this->chat->get_chat_section(),
             $this->newsfeed->get_newsfeed_section(),
             "<section id='placeholder'>placeholder</section>"
-        );
+        );*/
         $this->codebuilder->setKeyword("home_logged")
-                            ->appendCode(implode("", $content))
-                            ->add_head(base_url("js/chatController.js"))
+                            ->appendCode("Page under construction")
+                            //->appendCode(implode("", $content))
+                            //->add_head(base_url("js/chatController.js"))
                             ->wrap_all()
                             ->show();
     }
