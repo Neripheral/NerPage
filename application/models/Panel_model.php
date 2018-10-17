@@ -2,8 +2,32 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Head_model.php");
 
-class Panels_model extends Head_model{
-    private function getFileStorageData($panelId){
+class Panel_model extends Head_model{
+    public function getMatchingPanels($panel){
+        $this->db->select(array('id', 'ownerId', 'name', 'description'));
+        $this->db->from('Panels');
+        $this->db->where($panel->getAsArray_select());
+        $answer = $this->db->get()->result_array();
+        if(empty($answer))
+            return false;
+        $panels = array();
+        foreach($answer as $panelData){
+            $panel = new Panel($panelData);
+            array_push($panels, $panel);
+        }
+        return $panels;
+    }
+    
+    public function insert($panelToAdd){
+        $this->db->set($panelToAdd->getAsArray_insert());
+        $this->db->insert("Panels");
+        $error = $this->db->error();
+        if($error['code'] == 0)
+            return true;
+        return $error;
+    }
+    
+    /*private function getFileStorageData($panelId){
         $this->db->select(array('PanelFileStorage.id', 'PanelFileStorage.filename', 'PanelFileStorage.directory', 'PanelFileStorage.date'));
         $this->db->from('PanelFileStorage');
         $this->db->where(array('PanelFileStorage.panelId' => $panelId));
@@ -42,13 +66,13 @@ class Panels_model extends Head_model{
     
     
     public function getList($userId){
-        $this->db->select(array("Panels.id", 'Panels.name', 'Panels.description', 'PanelTypes.name'));
+        $this->db->select(array("Panels.id", 'Panels.name', 'Panels.description'));
         $this->db->from("Panels");
-        $this->db->join('PanelTypes', 'Panels.panelTypeId = PanelTypes.id', 'left');
         $this->db->where(array('Panels.ownerId' => $userId));
+        //log_message('debug', $this->db->get_compiled_select());
         $answer = $this->db->get()->result_array();
         return $answer;
-    }
+    }*/
 }
 /*
     select Panels.id, PanelTypes.name as 'panelType', Users.username as 'owner', Panels.name, Panels.description

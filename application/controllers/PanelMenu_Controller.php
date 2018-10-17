@@ -4,13 +4,17 @@ require_once APPPATH."third_party/smarty/Smarty.class.php";
 require_once("Head.php");
 
 class PanelMenu_Controller extends Head{
-    public function panelsList_view(){
-        $this->load->model('Panels_model');
-        $dataToPass = array('PANELS' => $this->Panels_model->getList($this->usermanager->getLoggedUser()->getId()));
-        foreach($dataToPass['PANELS'] as &$panel){
-            $panel["address"] = base_url('index.php/showPanel/showPanel_view/').$panel["id"];
+    public function panelMenu_view(){
+        $this->load->model('Panel_model');
+        $ownerPanel = new Panel(array('ownerId' => $this->usermanager->getLoggedUser()->getId()));
+        $panelList = $this->Panel_model->getMatchingPanels($ownerPanel);
+        $dataToPass = array('PANELS' => array());
+        foreach($panelList as $panel){
+            $panelArray = $panel->getAsArray();
+            $panelArray["address"] = base_url('index.php/panelShow/panel_show/').$panelArray["id"];
+            array_push($dataToPass['PANELS'], $panelArray);
         }
-        $keyword = 'panelsList';
+        $keyword = 'panelMenu';
         $this->codebuilder->setKeyword($keyword)
                             ->addCss()
                             ->append_section(array($keyword, $dataToPass))
@@ -19,6 +23,6 @@ class PanelMenu_Controller extends Head{
     }
     
     public function index(){
-        $this->panelsList_view();
+        $this->panelMenu_view();
     }
 }

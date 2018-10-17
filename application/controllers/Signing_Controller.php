@@ -32,11 +32,11 @@ class Signing_Controller extends Head{
         $this->load->model("Users_model");
         $user = $this->Users_model->getMatchingUser($user);
         if($user == NULL){
-            $this->session->set_flashdata("error", "Specified user doesn't exist");
+            $this->setError("Specified user doesn't exist");
             redirect("signing");
         }
         if(!$user->equalToPassword($input["password"])){
-            $this->session->set_flashdata("error", "Incorrect password");
+            $this->setError("Incorrect password");
             redirect("signing");
         }
         $this->logIn($user);

@@ -21,7 +21,9 @@ class Registration_Controller extends Head{
     }
     
     private function validateUserData($userData){
-        if($userData["username"] == null || $userData["password"] == null || $userData["email"] == null)
+        if($userData["username"] == null 
+        || $userData["password"] == null 
+        || $userData["email"] == null)
             throw new InvalidArgumentException("Missing input data");
         if(!filter_var($userData["email"], FILTER_VALIDATE_EMAIL))
             throw new InvalidArgumentException("Incorrect email address");
@@ -47,10 +49,10 @@ class Registration_Controller extends Head{
         try{
             $this->registerUserFromData($userData);
         }catch(DBException $e){
-            $this->session->set_flashdata("error", $e->getMessage());
+            $this->setError($e->getMessage());
             redirect("registration");
         }catch(InvalidArgumentException $e){
-            $this->session->set_flashdata("error", $e->getMessage());
+            $this->setError($e->getMessage());
             redirect("registration");
         }
         redirect("signing");

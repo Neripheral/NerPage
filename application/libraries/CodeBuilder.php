@@ -205,7 +205,7 @@ class CodeBuilder extends Head_Library{
     private function getNavTabs_logged(){
         return array(
             array("text" => "Home", "id" => "navtab_home", "href" => base_url("index.php/home"), "class" => "", "icon" => ""),
-            array("text" => "Panels", "id" => "navtab_panelsList", "href" => base_url("index.php/panelsList"), "class" => "", "icon" => "octicon octicon-browser"),
+            array("text" => "Panels", "id" => "navtab_panelsList", "href" => base_url("index.php/panelMenu"), "class" => "", "icon" => "octicon octicon-browser"),
             array("text" => $this->ci->session->loggedUser->getUsername(), "id" => "navtab_account", "href" => base_url("index.php/account"), "class" => "", "icon" => "octicon octicon-person"),
             array("text" => "Sign Out", "id" => "navtab_signout", "href" => base_url("index.php/signing/signout"), "class" => "", "icon" => "octicon octicon-link-external")
         );
