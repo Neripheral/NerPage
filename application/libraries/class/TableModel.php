@@ -16,4 +16,10 @@ abstract class TableModel{
         }
         return $this;
     }
+    
+    public function initializeAll(){
+        foreach($this as $key => $value){
+            $this->$key = null;
+        }
+    }
 }

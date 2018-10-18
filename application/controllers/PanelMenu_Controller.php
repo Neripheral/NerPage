@@ -6,7 +6,10 @@ require_once("Head.php");
 class PanelMenu_Controller extends Head{
     public function panelMenu_view(){
         $this->load->model('Panel_model');
-        $ownerPanel = new Panel(array('ownerId' => $this->usermanager->getLoggedUser()->getId()));
+        $user = $this->usermanager->getLoggedUser();
+        if($user === false)
+            redirect('signing');
+        $ownerPanel = new Panel(array('ownerId' => $user->getId()));
         $panelList = $this->Panel_model->getMatchingPanels($ownerPanel);
         $dataToPass = array('PANELS' => array());
         foreach($panelList as $panel){

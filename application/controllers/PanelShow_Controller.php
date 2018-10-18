@@ -1,26 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once("Head.php");
+require_once "Head.php";
+require_once APPPATH.'libraries/class/PanelTableColumn.php';
+require_once APPPATH.'libraries/class/PanelTableField.php';
 
 class PanelShow_Controller extends Head{
-    public function panel_show($panelId){
-            
+    public function addColumn($panelId, $title, $dataType){
+        $data = array('panelId' => $panelId, 'title' => $title, 'dataType' => $dataType);
+        /*...*/
+        $column = new PanelTableColumn($data);
+        $this->load->model('PanelTable_model');
+        $this->PanelTable_model->insert_column($column);
     }
     
-    public function panel_view($panelId){
-        $this->load->model("Panels_model");
-        $toPass = $this->Panels_model->getDetails($panelId);
-        
-        $fileRoot = base_url('files/'.$toPass['id']); 
-        foreach($toPass["DATA"] as &$data){
-            $data['address'] = $fileRoot.$data['directory'].$data['filename'];
-        }
-        $keyword = 'panel_fileStorage';
-        $this->codebuilder->setKeyword($keyword)
-                            ->append_section(array($keyword, $toPass))
-                            ->addJs()
-                            ->wrap_all()
-                            ->show();
+    public function addField($panelId, $columnId, $data){
+        $data = array('panelId' => $panelId, 'columnId' => $columnId, 'data' => $data);
+        /*...*/
+        $field = new PanelTableField($data);
+        $this->load->model('PanelTable_model');
+        $this->PanelTable_model->insert_field($field);
     }
     
     public function view($panelId){

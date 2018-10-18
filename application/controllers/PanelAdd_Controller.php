@@ -22,7 +22,10 @@ class PanelAdd_Controller extends Head{
     
     public function addPanelFromData($panelData){
         $this->validatePanelData($panelData);
-        $panelData['ownerId'] = $this->usermanager->getLoggedUser()->getId();
+        $user = $this->usermanager->getLoggedUser();
+        if($user === false)
+            redirect('signing');
+        $panelData['ownerId'] = $user->getId();
         $panel = new Panel($panelData);
         return $this->addPanelToDatabase($panel);
     }

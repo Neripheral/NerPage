@@ -7,7 +7,7 @@ require_once("Head.php");
 
 class Testing_Controller extends Head{
     public function index(){
-        $this->load->model("Posts_model");
-        var_dump($this->Posts_model->get());
+        $this->load->model("PanelTable_model");
+        $this->PanelTable_model->insert_column(1,'');
     }
 }
