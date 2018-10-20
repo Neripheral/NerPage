@@ -5,6 +5,12 @@ require_once APPPATH.'libraries/class/PanelTableColumn.php';
 require_once APPPATH.'libraries/class/PanelTableField.php';
 
 class PanelShow_Controller extends Head{
+    private function fetchInput_newColumn(){
+        $searchFor = array('title', 'dataType', 'panelId');
+        $data = $this->fetchdata->fetchInput($searchFor);
+        return $data;        
+    }
+    
     private function fetchInput_newRow(){
         $pattern = '/^inputColumn_([0-9]+)/';
         $data = array();
@@ -29,12 +35,12 @@ class PanelShow_Controller extends Head{
                             ->show();
     }
     
-    public function addColumn($panelId, $title, $dataType){
-        $data = array('panelId' => $panelId, 'title' => $title, 'dataType' => $dataType);
-        /*...*/
+    public function addColumn(){
+        $data = $this->fetchInput_newColumn();
         $column = new PanelTableColumn($data);
         $this->load->model('PanelTable_model');
         $this->PanelTable_model->insert_column($column);
+        redirect('panelShow/panel_show/'.$data['panelId']);
     }
     
     public function addRow(){

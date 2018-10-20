@@ -1,9 +1,12 @@
-<div class="container p-0 m-1 w-100">
-	<div id="panel-{$id}" class="panel bg-dark text-light rounded p-3 w-100 text-left">
+<div class="container rounded p-0 m-1 w-100 d-flex flex-row-reversed">
+	<div class='d-flex align-self-stretch '>
+		<a class='btn btn-default border-right-0 border-dark' role='button' href="{$address}">
+			<span class="octicon octicon-chevron-right test-dark"></span>
+		</a>
+	</div>
+	<div id="panel-{$id}" class="panel bg-dark text-light p-3 w-100 text-left">
 		<div class="panelHeader w-100">
-			<a href="{$address}"><button>
-				<h4>{$name} <span class="octicon octicon-chevron-right"></span></h4>
-			</button></a>
+			<h4>{$name}</h4>
 		</div>
 		<hr class="border-light">
 		<div class="panelContent">

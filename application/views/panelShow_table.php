@@ -11,7 +11,21 @@
     isset($fromController['TABLEDATA']['rows']) OR $fromController['TABLEDATA']['rows'] = array();
 ?>
 
-<div class='container pt-5'>
+<div class=' p-4 w-100'>
+		<div>
+			<form action="<?php echo base_url('index.php/panelShow/addColumn');?>" method="post" accept-charset="utf-8">
+				<div class='d-inline-flex flex-row w-100 text-right'>
+					<input name='panelId' type='hidden' value='<?php echo $fromController['PANELDATA']['panelId'];?>'>
+					<legend class='mr-2'>Add a column:</legend>
+					<input name='title' type='text' placeholder='Title' class='text-center'>
+                    <select name='dataType'>
+                    	<option>string</option>
+                    </select>
+					<input type='submit' value='+' class='btn bg-dark text-light'>
+				</div>
+			</form>
+		</div>
+		<hr>
 		<table class='table table-dark rounded'>
 			<thead class='thead-light'>
 				<tr>

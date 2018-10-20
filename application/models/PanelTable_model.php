@@ -30,16 +30,16 @@ class PanelTable_model extends Head_model{
     }
     
     public function insert_column($column){
-        $this->db->select('id');
+        $this->db->select_max('id');
         $this->db->from('PanelTable_Columns');
         $this->db->where(array('panelId' => $column->getPanelId()));
         $id = $this->db->get()->result_array()[0]['id'];
+        log_message('debug', var_export($id,true));
         if($id === null)
             $id = 0;
         else
             $id++;
         $column->setId($id);
-        
         $this->db->set($column->getAsArray_insert());
         $error = $this->db->insert('PanelTable_Columns');
         if($error["code"] == 0)

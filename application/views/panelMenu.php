@@ -11,9 +11,9 @@
 
 <div class='container'>
     <div class='jumbotron'>
-        <div class='panel-create container bg-dark text-light rounded p-3 w-100'>
-        	<div class="panelHeader w-100">
-        		<a class='w-100' href='<?php echo base_url('index.php/panelAdd');?>'><button class='w-100'>
+        <div class='panel-create rounded w-100'>
+        	<div class="panelHeader w-100 m-0">
+        		<a class='w-100' href='<?php echo base_url('index.php/panelAdd');?>'><button class='w-100 btn btn-default p-2'>
         			<h4>Add Panel</h4>
         		</button></a>
         	</div>
