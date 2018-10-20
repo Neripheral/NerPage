@@ -4,10 +4,13 @@ require_once("Head.php");
 
 // Alter anything your soul and heart desired. 
 // The front of imagination and the war with bugs...
-
+require_once APPPATH.'libraries/class/PanelTable.php';
 class Testing_Controller extends Head{
     public function index(){
         $this->load->model("PanelTable_model");
-        $this->PanelTable_model->insert_column(1,'');
+        $data = $this->PanelTable_model->getPanelFields(0);
+        $test = new PanelTable();
+        $test->setRowsFromData($data);
+        var_dump($test);
     }
 }

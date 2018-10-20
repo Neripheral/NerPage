@@ -68,9 +68,10 @@ class PanelTableField extends TableModel{
     
 /* ------PUBLIC-METHODS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
     
-    public function __construct($fieldData){
+    public function __construct($fieldData = null){
         $this->initializeAll();
-        $this->setAll($fieldData);
+        if($fieldData !== null)
+            $this->setAll($fieldData);
     }
     
 }
