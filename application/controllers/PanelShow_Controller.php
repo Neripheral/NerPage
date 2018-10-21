@@ -43,6 +43,12 @@ class PanelShow_Controller extends Head{
         redirect('panelShow/panel_show/'.$data['panelId']);
     }
     
+    public function removeRow($panelId, $rowId){
+        $this->load->model('PanelTable_model');
+        $this->PanelTable_model->remove_row($panelId, $rowId);
+        redirect('panelShow/panel_show/'.$panelId);
+    }
+    
     public function addRow(){
         $data = $this->fetchInput_newRow();
         $newRow = array();

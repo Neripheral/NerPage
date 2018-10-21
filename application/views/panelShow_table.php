@@ -9,6 +9,7 @@
         isset($column['dataType']) OR $column['dataType'] = 'error_dataType_missing';
     }
     isset($fromController['TABLEDATA']['rows']) OR $fromController['TABLEDATA']['rows'] = array();
+    //var_dump($fromController);
 ?>
 
 <div class=' p-4 w-100'>
@@ -51,9 +52,7 @@
                     echo '<tr class="table-dark text-dark">';
                         echo form_open(base_url('index.php/panelShow/addRow'));
                         echo form_hidden('panelId', $fromController['PANELDATA']['panelId']);
-                        echo '<td>';
-                        echo form_submit(array('class' => 'btn btn-default p-2', 'value' => '+'));
-                        echo '</td>';
+                        echo '<td></td>';
                         foreach($fromController['TABLEDATA']['columns'] as $key => $column){
                             echo '<td>';
                                 switch($column['dataType']){
@@ -65,11 +64,14 @@
                                 }
                             echo '</td>';
                         }
+                        echo '<td>';
+                        echo form_submit(array('class' => 'btn btn-default p-2', 'value' => '+'));
+                        echo '</td>';
                         echo form_close();
                     echo '</tr>';
                     
                     $counter = 1;
-                    foreach($fromController['TABLEDATA']['rows'] as &$row){
+                    foreach($fromController['TABLEDATA']['rows'] as $rowId => &$row){
                         echo '<tr>';
                             echo "<td>$counter</td>";
                             $counter++;
@@ -77,10 +79,19 @@
                             $tpl->template_dir = APPPATH.'views\\templates\\';
                             $tpl->compile_dir = APPPATH.'views\\templates_c\\';
                             
+                            $fieldCounter = 0;
                             foreach($row as &$data){
+                                $fieldCounter++;
                                 $tpl->assign('data', $data);
                                 $tpl->display('panelTable_field.tpl');
                             }
+                            
+                            while($fieldCounter++ < count($fromController['TABLEDATA']['columns']))
+                                echo '<td></td>';
+                            
+                            echo '<td>';
+                                echo '<a href="'.base_url('index.php/panelShow/removeRow/'.$fromController['PANELDATA']['panelId'].'/'.$rowId).'"><span class="octicon octicon-x"></span></a>';
+                            echo '</td>';
                         echo '</tr>';
                     }
 				?>

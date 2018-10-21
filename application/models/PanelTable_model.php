@@ -47,6 +47,12 @@ class PanelTable_model extends Head_model{
         return $error;
     }
     
+    public function remove_row($panelId, $rowId){
+        $this->db->where(array('panelId' => $panelId, 'id' => $rowId));
+        $this->db->update('PanelTable_Data', array('status' => 'disabled'));
+        return true;
+    }
+    
     public function insert_row($rowRaw){
         $this->db->trans_start();
         $this->db->select_max('id');
